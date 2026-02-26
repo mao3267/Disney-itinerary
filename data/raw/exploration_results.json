@@ -1,0 +1,594 @@
+{
+  "rides": [
+    {
+      "ride": "pirates_of_caribbean",
+      "total_rows": 301946,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2202,
+      "actual_notna": 11589,
+      "actual_pct": 3.84,
+      "posted_notna": 268442,
+      "posted_pct": 88.9,
+      "dates_with_actual": 2118,
+      "dates_with_posted": 2199,
+      "actual_stats": {
+        "mean": 18.2,
+        "std": 13.0,
+        "median": 16.0,
+        "min": 0.0,
+        "max": 101.0
+      },
+      "posted_stats": {
+        "mean": 28.5,
+        "std": 18.0,
+        "median": 25.0,
+        "min": 0.0,
+        "max": 185.0
+      }
+    },
+    {
+      "ride": "seven_dwarfs_train",
+      "total_rows": 321631,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2334,
+      "actual_notna": 7635,
+      "actual_pct": 2.37,
+      "posted_notna": 290934,
+      "posted_pct": 90.46,
+      "dates_with_actual": 2029,
+      "dates_with_posted": 2334,
+      "actual_stats": {
+        "mean": 24.0,
+        "std": 1064.1,
+        "median": 31.0,
+        "min": -92918.0,
+        "max": 217.0
+      },
+      "posted_stats": {
+        "mean": 77.0,
+        "std": 34.0,
+        "median": 70.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "splash_mountain",
+      "total_rows": 287948,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2144,
+      "actual_notna": 6875,
+      "actual_pct": 2.39,
+      "posted_notna": 249035,
+      "posted_pct": 86.49,
+      "dates_with_actual": 1819,
+      "dates_with_posted": 2144,
+      "actual_stats": {
+        "mean": 25.4,
+        "std": 18.7,
+        "median": 22.0,
+        "min": 0.0,
+        "max": 156.0
+      },
+      "posted_stats": {
+        "mean": 43.7,
+        "std": 30.3,
+        "median": 40.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "soarin",
+      "total_rows": 274770,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2187,
+      "actual_notna": 8850,
+      "actual_pct": 3.22,
+      "posted_notna": 260618,
+      "posted_pct": 94.85,
+      "dates_with_actual": 2007,
+      "dates_with_posted": 2184,
+      "actual_stats": {
+        "mean": 25.0,
+        "std": 15.8,
+        "median": 22.0,
+        "min": 0.0,
+        "max": 193.0
+      },
+      "posted_stats": {
+        "mean": 45.7,
+        "std": 27.3,
+        "median": 40.0,
+        "min": 0.0,
+        "max": 240.0
+      }
+    },
+    {
+      "ride": "spaceship_earth",
+      "total_rows": 277248,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2328,
+      "actual_notna": 4482,
+      "actual_pct": 1.62,
+      "posted_notna": 259959,
+      "posted_pct": 93.76,
+      "dates_with_actual": 1743,
+      "dates_with_posted": 2328,
+      "actual_stats": {
+        "mean": 9.8,
+        "std": 9.3,
+        "median": 7.0,
+        "min": 0.0,
+        "max": 81.0
+      },
+      "posted_stats": {
+        "mean": 18.8,
+        "std": 14.6,
+        "median": 15.0,
+        "min": 0.0,
+        "max": 155.0
+      }
+    },
+    {
+      "ride": "alien_saucers",
+      "total_rows": 129876,
+      "date_min": "2018-06-30",
+      "date_max": "2021-12-28",
+      "unique_dates": 1054,
+      "actual_notna": 3031,
+      "actual_pct": 2.33,
+      "posted_notna": 121772,
+      "posted_pct": 93.76,
+      "dates_with_actual": 956,
+      "dates_with_posted": 1054,
+      "actual_stats": {
+        "mean": 22.1,
+        "std": 12.6,
+        "median": 21.0,
+        "min": 0.0,
+        "max": 79.0
+      },
+      "posted_stats": {
+        "mean": 29.9,
+        "std": 16.0,
+        "median": 30.0,
+        "min": 0.0,
+        "max": 190.0
+      }
+    },
+    {
+      "ride": "rock_n_rollercoaster",
+      "total_rows": 277509,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2313,
+      "actual_notna": 6364,
+      "actual_pct": 2.29,
+      "posted_notna": 256144,
+      "posted_pct": 92.3,
+      "dates_with_actual": 1861,
+      "dates_with_posted": 2307,
+      "actual_stats": {
+        "mean": 29.3,
+        "std": 19.3,
+        "median": 26.0,
+        "min": 0.0,
+        "max": 195.0
+      },
+      "posted_stats": {
+        "mean": 59.0,
+        "std": 31.8,
+        "median": 55.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "slinky_dog",
+      "total_rows": 135946,
+      "date_min": "2018-06-30",
+      "date_max": "2021-12-28",
+      "unique_dates": 1054,
+      "actual_notna": 6005,
+      "actual_pct": 4.42,
+      "posted_notna": 119284,
+      "posted_pct": 87.74,
+      "dates_with_actual": 1007,
+      "dates_with_posted": 1054,
+      "actual_stats": {
+        "mean": 40.7,
+        "std": 22.7,
+        "median": 37.0,
+        "min": 0.0,
+        "max": 197.0
+      },
+      "posted_stats": {
+        "mean": 72.7,
+        "std": 27.8,
+        "median": 70.0,
+        "min": 0.0,
+        "max": 305.0
+      }
+    },
+    {
+      "ride": "toy_story_mania",
+      "total_rows": 284170,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2318,
+      "actual_notna": 10483,
+      "actual_pct": 3.69,
+      "posted_notna": 264102,
+      "posted_pct": 92.94,
+      "dates_with_actual": 2073,
+      "dates_with_posted": 2318,
+      "actual_stats": {
+        "mean": 35.1,
+        "std": 882.8,
+        "median": 23.0,
+        "min": 0.0,
+        "max": 90387.0
+      },
+      "posted_stats": {
+        "mean": 54.3,
+        "std": 30.1,
+        "median": 50.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "dinosaur",
+      "total_rows": 252403,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2215,
+      "actual_notna": 5059,
+      "actual_pct": 2.0,
+      "posted_notna": 228624,
+      "posted_pct": 90.58,
+      "dates_with_actual": 1842,
+      "dates_with_posted": 2214,
+      "actual_stats": {
+        "mean": 20.2,
+        "std": 15.3,
+        "median": 17.0,
+        "min": 0.0,
+        "max": 96.0
+      },
+      "posted_stats": {
+        "mean": 27.4,
+        "std": 19.6,
+        "median": 20.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "expedition_everest",
+      "total_rows": 275274,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2330,
+      "actual_notna": 8743,
+      "actual_pct": 3.18,
+      "posted_notna": 246429,
+      "posted_pct": 89.52,
+      "dates_with_actual": 1999,
+      "dates_with_posted": 2326,
+      "actual_stats": {
+        "mean": 15.5,
+        "std": 12.3,
+        "median": 13.0,
+        "min": 0.0,
+        "max": 137.0
+      },
+      "posted_stats": {
+        "mean": 32.4,
+        "std": 22.9,
+        "median": 30.0,
+        "min": 0.0,
+        "max": 180.0
+      }
+    },
+    {
+      "ride": "flight_of_passage",
+      "total_rows": 184818,
+      "date_min": "2017-05-26",
+      "date_max": "2021-12-28",
+      "unique_dates": 1457,
+      "actual_notna": 5965,
+      "actual_pct": 3.23,
+      "posted_notna": 173527,
+      "posted_pct": 93.89,
+      "dates_with_actual": 1273,
+      "dates_with_posted": 1457,
+      "actual_stats": {
+        "mean": 72.9,
+        "std": 662.2,
+        "median": 53.0,
+        "min": 0.0,
+        "max": 47897.0
+      },
+      "posted_stats": {
+        "mean": 114.8,
+        "std": 53.7,
+        "median": 115.0,
+        "min": 0.0,
+        "max": 390.0
+      }
+    },
+    {
+      "ride": "kilimanjaro_safaris",
+      "total_rows": 257785,
+      "date_min": "2015-01-01",
+      "date_max": "2021-12-28",
+      "unique_dates": 2330,
+      "actual_notna": 6516,
+      "actual_pct": 2.53,
+      "posted_notna": 237236,
+      "posted_pct": 92.03,
+      "dates_with_actual": 1900,
+      "dates_with_posted": 2329,
+      "actual_stats": {
+        "mean": 22.2,
+        "std": 17.8,
+        "median": 18.0,
+        "min": 0.0,
+        "max": 206.0
+      },
+      "posted_stats": {
+        "mean": 40.0,
+        "std": 28.6,
+        "median": 35.0,
+        "min": 0.0,
+        "max": 300.0
+      }
+    },
+    {
+      "ride": "navi_river",
+      "total_rows": 182121,
+      "date_min": "2017-05-26",
+      "date_max": "2021-12-28",
+      "unique_dates": 1457,
+      "actual_notna": 4574,
+      "actual_pct": 2.51,
+      "posted_notna": 169980,
+      "posted_pct": 93.33,
+      "dates_with_actual": 1304,
+      "dates_with_posted": 1454,
+      "actual_stats": {
+        "mean": 29.0,
+        "std": 22.4,
+        "median": 24.0,
+        "min": 0.0,
+        "max": 203.0
+      },
+      "posted_stats": {
+        "mean": 62.5,
+        "std": 32.2,
+        "median": 60.0,
+        "min": 0.0,
+        "max": 225.0
+      }
+    }
+  ],
+  "parks_metadata": {
+    "total_rows": 2079,
+    "date_min": "2015-01-01",
+    "date_max": "2021-08-31",
+    "wdw_ticket_season_coverage": 1218,
+    "wdw_ticket_season_pct": 58.59,
+    "wdw_ticket_season_distribution": {
+      "regular": 615,
+      "peak": 336,
+      "value": 267
+    },
+    "wdwseason_coverage": 1992,
+    "wdwseason_pct": 95.82,
+    "wdwseason_distribution": {
+      "SPRING": 526,
+      "SUMMER BREAK": 283,
+      "WINTER": 236,
+      "FALL": 221,
+      "SEPTEMBER LOW": 153,
+      "CHRISTMAS": 95,
+      "EASTER": 95,
+      "THANKSGIVING": 72,
+      "JERSEY WEEK": 61,
+      "PRESIDENTS WEEK": 55,
+      "MARTIN LUTHER KING JUNIOR DAY": 45,
+      "CHRISTMAS PEAK": 37,
+      "JULY 4TH": 29,
+      "HALLOWEEN": 26,
+      "MEMORIAL DAY": 23,
+      "COLUMBUS DAY": 20,
+      "MARDI GRAS": 15
+    },
+    "columns": [
+      "date",
+      "wdw_ticket_season",
+      "wdwseason",
+      "wdwmaxtemp",
+      "wdwmintemp",
+      "wdwmeantemp",
+      "mkopen",
+      "mkclose",
+      "mkhours",
+      "epopen",
+      "epclose",
+      "ephours",
+      "hsopen",
+      "hsclose",
+      "hshours",
+      "akopen",
+      "akclose",
+      "akhours"
+    ]
+  },
+  "attractions_metadata": {
+    "total_rows": 14,
+    "columns": [
+      "dataset_name",
+      "name",
+      "short_name",
+      "park",
+      "land",
+      "opened_on",
+      "duration",
+      "average_wait_per_hundred"
+    ],
+    "data": [
+      {
+        "dataset_name": "alien_saucers",
+        "name": "Alien Swirling Saucers",
+        "short_name": "Alien Saucers",
+        "park": "Disney's Hollywood Studios",
+        "land": "Toy Story Land",
+        "opened_on": "2018-06-30",
+        "duration": 2.5,
+        "average_wait_per_hundred": 10.0
+      },
+      {
+        "dataset_name": "dinosaur",
+        "name": "DINOSAUR",
+        "short_name": "DINOSAUR",
+        "park": "Disney's Animal Kingdom",
+        "land": "DinoLand U.S.A.",
+        "opened_on": "1998-04-22",
+        "duration": 3.5,
+        "average_wait_per_hundred": 3.0
+      },
+      {
+        "dataset_name": "expedition_everest",
+        "name": "Expedition Everest - Legend of the Forbidden Mountain",
+        "short_name": "Expedition Everest",
+        "park": "Disney's Animal Kingdom",
+        "land": "Asia",
+        "opened_on": "2006-04-07",
+        "duration": 4.0,
+        "average_wait_per_hundred": 4.0
+      },
+      {
+        "dataset_name": "flight_of_passage",
+        "name": "Avatar Flight of Passage",
+        "short_name": "Flight of Passage",
+        "park": "Disney's Animal Kingdom",
+        "land": "Pandora - The World of Avatar",
+        "opened_on": "2017-05-27",
+        "duration": 6.0,
+        "average_wait_per_hundred": 4.0
+      },
+      {
+        "dataset_name": "kilimanjaro_safaris",
+        "name": "Kilimanjaro Safaris",
+        "short_name": "Kilimanjaro Safaris",
+        "park": "Disney's Animal Kingdom",
+        "land": "Africa",
+        "opened_on": "1998-04-22",
+        "duration": 20.0,
+        "average_wait_per_hundred": 4.0
+      },
+      {
+        "dataset_name": "navi_river",
+        "name": "Na'vi River Journey",
+        "short_name": "Na'vi River",
+        "park": "Disney's Animal Kingdom",
+        "land": "Pandora - The World of Avatar",
+        "opened_on": "2017-05-27",
+        "duration": 5.0,
+        "average_wait_per_hundred": 5.0
+      },
+      {
+        "dataset_name": "pirates_of_caribbean",
+        "name": "Pirates of the Caribbean",
+        "short_name": "Pirates of Caribbean",
+        "park": "Magic Kingdom",
+        "land": "Adventureland",
+        "opened_on": "1973-12-17",
+        "duration": 7.5,
+        "average_wait_per_hundred": 1.5
+      },
+      {
+        "dataset_name": "rock_n_rollercoaster",
+        "name": "Rock 'n' Roller Coaster Starring Aerosmith",
+        "short_name": "Rock Coaster",
+        "park": "Disney's Hollywood Studios",
+        "land": "Sunset Boulevard",
+        "opened_on": "1999-07-29",
+        "duration": 1.5,
+        "average_wait_per_hundred": 2.5
+      },
+      {
+        "dataset_name": "seven_dwarfs_train",
+        "name": "Seven Dwarfs Mine Train",
+        "short_name": "7 Dwarfs Train",
+        "park": "Magic Kingdom",
+        "land": "Fantasyland",
+        "opened_on": "2014-05-28",
+        "duration": 3.0,
+        "average_wait_per_hundred": 5.0
+      },
+      {
+        "dataset_name": "slinky_dog",
+        "name": "Slinky Dog Dash",
+        "short_name": "Slinky Dog",
+        "park": "Disney's Hollywood Studios",
+        "land": "Toy Story Land",
+        "opened_on": "2018-06-30",
+        "duration": 3.0,
+        "average_wait_per_hundred": 5.0
+      },
+      {
+        "dataset_name": "soarin",
+        "name": "Soarin' Around the World",
+        "short_name": "Soarin'",
+        "park": "Epcot",
+        "land": "World Nature",
+        "opened_on": "2005-05-05",
+        "duration": 8.0,
+        "average_wait_per_hundred": 3.0
+      },
+      {
+        "dataset_name": "spaceship_earth",
+        "name": "Spaceship Earth",
+        "short_name": "Spaceship Earth",
+        "park": "Epcot",
+        "land": "World Celebration",
+        "opened_on": "1982-10-01",
+        "duration": 16.0,
+        "average_wait_per_hundred": 3.0
+      },
+      {
+        "dataset_name": "splash_mountain",
+        "name": "Splash Mountain",
+        "short_name": "Splash Mountain",
+        "park": "Magic Kingdom",
+        "land": "Frontierland",
+        "opened_on": "1992-07-17",
+        "duration": 18.0,
+        "average_wait_per_hundred": 3.5
+      },
+      {
+        "dataset_name": "toy_story_mania",
+        "name": "Toy Story Mania!",
+        "short_name": "Toy Story Mania!",
+        "park": "Disney's Hollywood Studios",
+        "land": "Toy Story Land",
+        "opened_on": "2008-05-31",
+        "duration": 6.5,
+        "average_wait_per_hundred": 4.5
+      }
+    ]
+  },
+  "common_date_window": {
+    "start": "2018-06-30",
+    "end": "2021-12-28"
+  }
+}
