@@ -1,0 +1,145 @@
+{
+  "description": "Ride metadata for SOCP solver. Ratings from aggregated online sources (TripAdvisor, Mousehacking, Disney Food Blog, TouringPlans).",
+  "rides": [
+    {
+      "dataset_name": "alien_saucers",
+      "name": "Alien Swirling Saucers",
+      "short_name": "Alien Saucers",
+      "park": "Disney's Hollywood Studios",
+      "land": "Toy Story Land",
+      "duration_min": 2.5,
+      "wait_per_100": 10.0,
+      "rating": 4.5
+    },
+    {
+      "dataset_name": "dinosaur",
+      "name": "DINOSAUR",
+      "short_name": "DINOSAUR",
+      "park": "Disney's Animal Kingdom",
+      "land": "DinoLand U.S.A.",
+      "duration_min": 3.5,
+      "wait_per_100": 3.0,
+      "rating": 5.5
+    },
+    {
+      "dataset_name": "expedition_everest",
+      "name": "Expedition Everest",
+      "short_name": "Expedition Everest",
+      "park": "Disney's Animal Kingdom",
+      "land": "Asia",
+      "duration_min": 4.0,
+      "wait_per_100": 4.0,
+      "rating": 9.0
+    },
+    {
+      "dataset_name": "flight_of_passage",
+      "name": "Avatar Flight of Passage",
+      "short_name": "Flight of Passage",
+      "park": "Disney's Animal Kingdom",
+      "land": "Pandora - The World of Avatar",
+      "duration_min": 6.0,
+      "wait_per_100": 4.0,
+      "rating": 9.8
+    },
+    {
+      "dataset_name": "kilimanjaro_safaris",
+      "name": "Kilimanjaro Safaris",
+      "short_name": "Kilimanjaro Safaris",
+      "park": "Disney's Animal Kingdom",
+      "land": "Africa",
+      "duration_min": 20.0,
+      "wait_per_100": 4.0,
+      "rating": 9.2
+    },
+    {
+      "dataset_name": "navi_river",
+      "name": "Na'vi River Journey",
+      "short_name": "Na'vi River",
+      "park": "Disney's Animal Kingdom",
+      "land": "Pandora - The World of Avatar",
+      "duration_min": 5.0,
+      "wait_per_100": 5.0,
+      "rating": 6.5
+    },
+    {
+      "dataset_name": "pirates_of_caribbean",
+      "name": "Pirates of the Caribbean",
+      "short_name": "Pirates of Caribbean",
+      "park": "Magic Kingdom",
+      "land": "Adventureland",
+      "duration_min": 7.5,
+      "wait_per_100": 1.5,
+      "rating": 8.0
+    },
+    {
+      "dataset_name": "rock_n_rollercoaster",
+      "name": "Rock 'n' Roller Coaster",
+      "short_name": "Rock Coaster",
+      "park": "Disney's Hollywood Studios",
+      "land": "Sunset Boulevard",
+      "duration_min": 1.5,
+      "wait_per_100": 2.5,
+      "rating": 8.0
+    },
+    {
+      "dataset_name": "seven_dwarfs_train",
+      "name": "Seven Dwarfs Mine Train",
+      "short_name": "7 Dwarfs Train",
+      "park": "Magic Kingdom",
+      "land": "Fantasyland",
+      "duration_min": 3.0,
+      "wait_per_100": 5.0,
+      "rating": 8.2
+    },
+    {
+      "dataset_name": "slinky_dog",
+      "name": "Slinky Dog Dash",
+      "short_name": "Slinky Dog",
+      "park": "Disney's Hollywood Studios",
+      "land": "Toy Story Land",
+      "duration_min": 3.0,
+      "wait_per_100": 5.0,
+      "rating": 8.3
+    },
+    {
+      "dataset_name": "soarin",
+      "name": "Soarin' Around the World",
+      "short_name": "Soarin'",
+      "park": "Epcot",
+      "land": "World Nature",
+      "duration_min": 8.0,
+      "wait_per_100": 3.0,
+      "rating": 8.2
+    },
+    {
+      "dataset_name": "spaceship_earth",
+      "name": "Spaceship Earth",
+      "short_name": "Spaceship Earth",
+      "park": "Epcot",
+      "land": "World Celebration",
+      "duration_min": 16.0,
+      "wait_per_100": 3.0,
+      "rating": 7.8
+    },
+    {
+      "dataset_name": "splash_mountain",
+      "name": "Splash Mountain",
+      "short_name": "Splash Mountain",
+      "park": "Magic Kingdom",
+      "land": "Frontierland",
+      "duration_min": 18.0,
+      "wait_per_100": 3.5,
+      "rating": 9.0
+    },
+    {
+      "dataset_name": "toy_story_mania",
+      "name": "Toy Story Mania!",
+      "short_name": "Toy Story Mania!",
+      "park": "Disney's Hollywood Studios",
+      "land": "Toy Story Land",
+      "duration_min": 6.5,
+      "wait_per_100": 4.5,
+      "rating": 8.5
+    }
+  ]
+}
