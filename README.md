@@ -3,7 +3,7 @@
 **CSE 203B — Convex Optimization**
 **UC San Diego, Winter 2026**
 
-A robust Second-Order Cone Program (SOCP) itinerary optimizer for Walt Disney World. Given uncertain ride wait times, the solver selects an optimal subset of rides that maximizes enjoyment while keeping total wait time within a budget — even under worst-case distributional uncertainty.
+A robust Second-Order Cone Program (SOCP) itinerary optimizer for Walt Disney World Florida. Given uncertain ride wait times, the solver selects an optimal subset of rides that maximizes enjoyment while keeping total wait time within a budget — even under worst-case distributional uncertainty.
 
 ## Data Preprocessing
 
@@ -18,7 +18,7 @@ Wait time data comes from the [`touringplans`](https://github.com/touringplans/d
 | Hollywood Studios | Alien Swirling Saucers, Rock 'n' Roller Coaster, Slinky Dog Dash, Toy Story Mania! |
 | Animal Kingdom | DINOSAUR, Expedition Everest, Avatar Flight of Passage, Kilimanjaro Safaris, Na'vi River Journey |
 
-Ride ratings (1-10 scale) were aggregated from TripAdvisor, Mousehacking, Disney Food Blog, and TouringPlans. Range: 4.5 (Alien Saucers) to 9.8 (Flight of Passage).
+Ride ratings (1–10 scale) are computed as an equal-weighted average of four sources, each normalized to 1–10: TouringPlans expert ratings, TouringPlans user reviews, TripAdvisor bubble ratings, and Mousehacking editorial rankings. Range: 5.8 (Alien Saucers) to 9.6 (Flight of Passage). See [`data/rating_methodology.md`](data/rating_methodology.md) for raw scores, normalization formulas, and per-ride calculations.
 
 ### Cleaning Steps
 
