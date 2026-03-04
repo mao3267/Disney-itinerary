@@ -1,0 +1,15 @@
+Baseline: random
+Budget (min): 600.00
+Total time used (min): 596.26
+Total rating: 77.80
+Rides picked (in order):
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=81.12 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=80.01 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=60.36 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=55.65 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=57.97 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.17 min
+  - navi_river             | Na'vi River Journey            | rating=6.5 | cost=62.60 min
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=53.94 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=71.30 min
+  - alien_saucers          | Alien Swirling Saucers         | rating=4.5 | cost=49.14 min

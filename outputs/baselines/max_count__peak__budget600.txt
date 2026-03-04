@@ -1,0 +1,16 @@
+Baseline: max_count
+Budget (min): 600.00
+Total time used (min): 592.26
+Total rating: 83.50
+Rides picked (in order):
+  - alien_saucers          | Alien Swirling Saucers         | rating=4.5 | cost=49.14 min
+  - dinosaur               | DINOSAUR                       | rating=5.5 | cost=52.57 min
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=53.94 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=73.21 min
+  - navi_river             | Na'vi River Journey            | rating=6.5 | cost=62.60 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=55.65 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=60.36 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=71.30 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=31.35 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.17 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=57.97 min

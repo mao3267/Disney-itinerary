@@ -1,0 +1,15 @@
+Baseline: max_rating
+Budget (min): 600.00
+Total time used (min): 585.42
+Total rating: 84.20
+Rides picked (in order):
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=54.38 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=76.82 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=58.17 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=54.88 min
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=71.43 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=69.73 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=36.79 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=25.12 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=79.59 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=58.51 min
