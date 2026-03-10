@@ -1,0 +1,27 @@
+Method:              misocp
+Season:              all
+Budget (min):        600.00
+Kappa:               1.2816  (confidence = 90.0%)
+Solver status:       optimal
+
+Total rating:        82.50
+Rides selected:      10
+
+Time breakdown:
+  Det. cost  (2*drive + duration):        299.50 min
+  Nominal    (det + mean wait):           553.76 min
+  Robust     (nominal + kappa*||L^T x||): 596.32 min
+  Budget:                                 600.00 min
+  Slack (budget - robust):                3.68 min
+
+Rides picked (in order of descending rating):
+  - kilimanjaro_safaris         Kilimanjaro Safaris                 rating=9.2  det=50.00  mu_wait=22.29  total_cost_est=72.29 min
+  - expedition_everest          Expedition Everest                  rating=9.0  det=34.00  mu_wait=12.81  total_cost_est=46.81 min
+  - splash_mountain             Splash Mountain                     rating=9.0  det=48.00  mu_wait=38.26  total_cost_est=86.26 min
+  - toy_story_mania             Toy Story Mania!                    rating=8.5  det=26.50  mu_wait=21.29  total_cost_est=47.79 min
+  - slinky_dog                  Slinky Dog Dash                     rating=8.3  det=23.00  mu_wait=41.86  total_cost_est=64.86 min
+  - soarin                      Soarin' Around the World            rating=8.2  det=8.00  mu_wait=26.59  total_cost_est=34.59 min
+  - pirates_of_caribbean        Pirates of the Caribbean            rating=8.0  det=37.50  mu_wait=25.79  total_cost_est=63.29 min
+  - rock_n_rollercoaster        Rock 'n' Roller Coaster             rating=8.0  det=21.50  mu_wait=31.76  total_cost_est=53.26 min
+  - spaceship_earth             Spaceship Earth                     rating=7.8  det=16.00  mu_wait=8.97  total_cost_est=24.97 min
+  - navi_river                  Na'vi River Journey                 rating=6.5  det=35.00  mu_wait=24.65  total_cost_est=59.65 min
