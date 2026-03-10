@@ -51,11 +51,9 @@ def load_problem(processed_dir: Path, season: str) -> ProblemData:
     det_costs = 2.0 * drives + durations   # walk-there + ride + walk-back (no wait)
 
     # Cholesky decomposition: sigma = L L^T
-    # sigma is already PSD (verified in preprocess.py)
     try:
         L = np.linalg.cholesky(sigma)
     except np.linalg.LinAlgError:
-        # Tiny numerical fix: regularise diagonal
         sigma += np.eye(len(mu)) * 1e-8
         L = np.linalg.cholesky(sigma)
 
@@ -113,9 +111,7 @@ def solve_misocp(
 
     prob = cp.Problem(objective, constraints)
 
-    # Try solvers in order of preference for MISOCP.
-    # HiGHS supports MILP; SCIP/ECOS_BB support MISOCP but may not be installed.
-    # For n=14 the enumeration fallback is exact and instantaneous.
+
     solvers_to_try = ["SCIP", "GLPK_MI", "HIGHS", "ECOS_BB"]
     status = "failed"
     for solver in solvers_to_try:
@@ -170,7 +166,7 @@ def solve_relaxed(
     prob.solve(solver="CLARABEL", verbose=False)
 
     if x.value is None:
-        prob.solve(verbose=False)   # fallback to CVXPY default
+        prob.solve(verbose=False)
 
     return x.value, prob.status
 
@@ -193,10 +189,7 @@ def solve_enumerate(
     if n > 25:
         raise ValueError(f"Enumeration is exponential; n={n} is too large.")
 
-    # Precompute column vectors for vectorised cost computation
     # cost(mask) = (det_costs + mu) @ x  +  kappa * ||L^T x||_2
-    # We iterate with numpy for speed but it's only 16384 iterations, fine in pure Python too.
-
     best_mask   = 0
     best_rating = -1e18
     best_cost   = 1e18
@@ -286,7 +279,7 @@ def format_result(res: SOCPResult, data: ProblemData) -> str:
         f"{'-'*26}  {'-'*32}  {'-'*6}  {'-'*6}  {'-'*7}  {'-'*4}",
     ]
     for i, name in enumerate(res.ride_names):
-        ride_info = next(r for r in data.__class__.__mro__)   # placeholder
+        ride_info = next(r for r in data.__class__.__mro__)
         sel = "  ✓" if res.x[i] > 0.5 else "   "
         lines.append(
             f"{name:<26}  {name:<32}  {data.ratings[i]:>6.1f}  "
@@ -372,7 +365,6 @@ def _dispatch_solver(
     else:  # misocp — fall back to enumerate if no MI solver is available
         x, status = solve_misocp(data, budget, kappa)
         if x is None:
-            # n=14 → enumeration is exact and O(2^14)=16384 subsets, always fast
             print(
                 "  [info] No MISOCP solver available (need SCIP/GLPK_MI/ECOS_BB). "
                 "Using exact enumeration (n=14, optimal).",
@@ -396,7 +388,6 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
-    # Problem spec
     p.add_argument(
         "--season",
         choices=["all", "peak", "regular", "value"],
@@ -411,7 +402,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Total time budget in minutes (default: 600).",
     )
 
-    # Robustness level — exactly one of kappa or confidence_pct
     group = p.add_mutually_exclusive_group()
     group.add_argument(
         "--kappa",
@@ -436,11 +426,10 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
 
-    # Method
     p.add_argument(
         "--method",
         choices=["misocp", "relax", "enumerate"],
-        default="enumerate",  # exact & fast for n=14; misocp falls back to this anyway
+        default="enumerate",
         help=(
             "misocp    — CVXPY Mixed-Integer SOCP (default).\n"
             "relax     — CVXPY continuous SOCP relaxation (x in [0,1]).\n"
@@ -458,7 +447,6 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
 
-    # Paths
     p.add_argument("--processed_dir", type=str, default=str(default_proc))
     p.add_argument("--output_dir",    type=str, default=str(default_out))
     p.add_argument(
@@ -477,7 +465,6 @@ def main() -> None:
     processed_dir = Path(args.processed_dir)
     output_dir    = Path(args.output_dir)
 
-    # ---- Resolve kappa ----
     if args.kappa is not None:
         kappa          = args.kappa
         confidence_pct = NormalDist().cdf(kappa) * 100.0
@@ -487,7 +474,6 @@ def main() -> None:
         kappa          = NormalDist().inv_cdf(args.confidence_pct / 100.0)
         confidence_pct = args.confidence_pct
     else:
-        # Default: 90% confidence
         confidence_pct = 90.0
         kappa          = NormalDist().inv_cdf(confidence_pct / 100.0)
 
@@ -510,7 +496,6 @@ def main() -> None:
         )
         rows = run_sweep(data, args.budget_min, kappas, args.method, args.season)
 
-        # Print CSV
         header = "kappa,confidence_pct,total_rating,total_nominal,total_robust,n_rides,solver_status,rides_selected"
         print("\n" + header)
         for row in rows:
@@ -537,7 +522,6 @@ def main() -> None:
                     )
             print(f"\nSaved: {csv_path}")
 
-            # Optional: plot if matplotlib available
             _try_plot_sweep(rows, args, output_dir, tag)
 
         return
@@ -555,7 +539,6 @@ def main() -> None:
         print(f"\n[ERROR] Solver returned no solution (status={status}).")
         sys.exit(1)
 
-    # Build result object
     res = SOCPResult(
         method=args.method,
         season=args.season,
@@ -699,7 +682,6 @@ def _try_plot_sweep(rows: List[dict], args, output_dir: Path, tag: str) -> None:
     ax2.set_title("Time Budget Utilisation vs κ")
     ax2.grid(True, alpha=0.3)
 
-    # Add secondary x-axis with confidence percentages
     ax2_top = ax2.twiny()
     ax2_top.set_xlim(ax2.get_xlim())
     tick_kappas = [0.0, 0.842, 1.282, 1.645, 2.0, 2.326, 3.0]
