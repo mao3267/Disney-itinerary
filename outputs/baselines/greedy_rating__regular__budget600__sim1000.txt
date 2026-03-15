@@ -1,0 +1,38 @@
+Baseline: greedy_rating
+Budget (min): 600.00
+Total time used (min): 573.91
+Total rating: 78.00
+Rides picked (in order):
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=54.38 min
+  - flight_of_passage      | Avatar Flight of Passage       | rating=9.8 | cost=101.54 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=76.82 min
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=71.43 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=69.73 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=36.79 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=25.12 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=79.59 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=58.51 min
+Baseline: greedy_rating
+Budget (min): 600.00
+Deterministic total time used (using mean waits): 573.91
+Total rating: 78.00
+Rides picked (in order):
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=54.38 min
+  - flight_of_passage      | Avatar Flight of Passage       | rating=9.8 | cost=101.54 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=76.82 min
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=71.43 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=69.73 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=36.79 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=25.12 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=79.59 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=58.51 min
+
+Monte Carlo overrun experiment
+  Simulations: 1000
+  P(total_time > budget): 0.2640
+  Mean simulated total time: 571.44 min
+  Std simulated total time: 43.99 min
+  95th percentile total time: 643.33 min
+  99th percentile total time: 665.51 min
+  Avg overrun | overrun happened: 25.06 min
+  Min / Max simulated total time: 428.89 / 703.98 min

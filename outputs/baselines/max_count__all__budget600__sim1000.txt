@@ -1,0 +1,42 @@
+Baseline: max_count
+Budget (min): 600.00
+Total time used (min): 592.81
+Total rating: 87.80
+Rides picked (in order):
+  - alien_saucers          | Alien Swirling Saucers         | rating=4.5 | cost=36.95 min
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=46.81 min
+  - flight_of_passage      | Avatar Flight of Passage       | rating=9.8 | cost=88.35 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=72.29 min
+  - navi_river             | Na'vi River Journey            | rating=6.5 | cost=59.65 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=63.29 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=53.26 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=64.86 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=34.59 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.97 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=47.79 min
+Baseline: max_count
+Budget (min): 600.00
+Deterministic total time used (using mean waits): 592.81
+Total rating: 87.80
+Rides picked (in order):
+  - alien_saucers          | Alien Swirling Saucers         | rating=4.5 | cost=36.95 min
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=46.81 min
+  - flight_of_passage      | Avatar Flight of Passage       | rating=9.8 | cost=88.35 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=72.29 min
+  - navi_river             | Na'vi River Journey            | rating=6.5 | cost=59.65 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=63.29 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=53.26 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=64.86 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=34.59 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.97 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=47.79 min
+
+Monte Carlo overrun experiment
+  Simulations: 1000
+  P(total_time > budget): 0.4260
+  Mean simulated total time: 593.56 min
+  Std simulated total time: 35.33 min
+  95th percentile total time: 650.77 min
+  99th percentile total time: 677.72 min
+  Avg overrun | overrun happened: 26.10 min
+  Min / Max simulated total time: 466.42 / 695.64 min

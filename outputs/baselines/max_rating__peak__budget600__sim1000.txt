@@ -1,0 +1,40 @@
+Baseline: max_rating
+Budget (min): 600.00
+Total time used (min): 589.08
+Total rating: 84.20
+Rides picked (in order):
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=53.94 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=73.21 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=55.65 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=60.36 min
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=81.12 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=71.30 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=31.35 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.17 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=80.01 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=57.97 min
+Baseline: max_rating
+Budget (min): 600.00
+Deterministic total time used (using mean waits): 589.08
+Total rating: 84.20
+Rides picked (in order):
+  - expedition_everest     | Expedition Everest             | rating=9.0 | cost=53.94 min
+  - kilimanjaro_safaris    | Kilimanjaro Safaris            | rating=9.2 | cost=73.21 min
+  - pirates_of_caribbean   | Pirates of the Caribbean       | rating=8.0 | cost=55.65 min
+  - rock_n_rollercoaster   | Rock 'n' Roller Coaster        | rating=8.0 | cost=60.36 min
+  - seven_dwarfs_train     | Seven Dwarfs Mine Train        | rating=8.2 | cost=81.12 min
+  - slinky_dog             | Slinky Dog Dash                | rating=8.3 | cost=71.30 min
+  - soarin                 | Soarin' Around the World       | rating=8.2 | cost=31.35 min
+  - spaceship_earth        | Spaceship Earth                | rating=7.8 | cost=24.17 min
+  - splash_mountain        | Splash Mountain                | rating=9.0 | cost=80.01 min
+  - toy_story_mania        | Toy Story Mania!               | rating=8.5 | cost=57.97 min
+
+Monte Carlo overrun experiment
+  Simulations: 1000
+  P(total_time > budget): 0.4040
+  Mean simulated total time: 591.07 min
+  Std simulated total time: 50.00 min
+  95th percentile total time: 673.90 min
+  99th percentile total time: 711.06 min
+  Avg overrun | overrun happened: 40.06 min
+  Min / Max simulated total time: 459.31 / 739.90 min

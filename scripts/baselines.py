@@ -1,10 +1,12 @@
 import json
-import math
 import random
 import argparse
+import statistics
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple
+
+import numpy as np
 
 
 @dataclass(frozen=True)
@@ -25,6 +27,14 @@ class Ride:
 def load_json(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+    
+
+def load_wait_stats_npz(path: Path) -> Tuple[np.ndarray, np.ndarray, List[str]]:
+    data = np.load(path, allow_pickle=True)
+    mu = np.asarray(data["mu"], dtype=float)
+    sigma = np.asarray(data["sigma"], dtype=float)
+    ride_names = [str(x) for x in data["ride_names"].tolist()]
+    return mu, sigma, ride_names
 
 
 def build_rides(
@@ -43,11 +53,6 @@ def build_rides(
     rides: List[Ride] = []
     for r in meta["rides"]:
         key = r["dataset_name"]
-
-        if key not in driving:
-            raise KeyError(f"Missing driving time for ride '{key}' in {driving_times_path}")
-        if key not in mu:
-            raise KeyError(f"Missing wait mean (mu) for ride '{key}' in {wait_stats_path}")
 
         rides.append(
             Ride(
@@ -115,12 +120,10 @@ def _subset_cost_rating(rides: List[Ride], mask: int) -> Tuple[float, float, int
 # ----------------------------
 def baseline_max_rating_bruteforce(rides: List[Ride], budget_min: float) -> List[Ride]:
     n = len(rides)
-    if n > 25:
-        raise ValueError(f"Bruteforce is exponential; n={n} is too large for this baseline.")
 
     best_mask = 0
     best_rating = -1e100
-    best_time = 1e100
+    best_time = -1e100
     best_count = -1
 
     for mask in range(1 << n):
@@ -150,13 +153,11 @@ def baseline_max_rating_bruteforce(rides: List[Ride], budget_min: float) -> List
 # ----------------------------
 def baseline_max_count_bruteforce(rides: List[Ride], budget_min: float) -> List[Ride]:
     n = len(rides)
-    if n > 25:
-        raise ValueError(f"Bruteforce is exponential; n={n} is too large for this baseline.")
 
     best_mask = 0
     best_count = -1
     best_rating = -1e100
-    best_time = 1e100
+    best_time = -1e100
 
     for mask in range(1 << n):
         t, s, c = _subset_cost_rating(rides, mask)
@@ -198,6 +199,88 @@ def baseline_greedy_rating_desc(rides: List[Ride], budget_min: float) -> List[Ri
     return stable
 
 
+# ----------------------------
+# simulate plan with variance
+# ----------------------------
+def simulate_plan_time_once(
+    selected: List[Ride],
+    mu_vec: np.ndarray,
+    sigma_mat: np.ndarray,
+    ride_names: List[str],
+    rng: np.random.Generator,
+    clip_min: float = 0.0,
+    clip_max: float = 300.0,
+) -> float:
+    name_to_idx = {name: i for i, name in enumerate(ride_names)}
+    idx = [name_to_idx[r.key] for r in selected]
+
+    sub_mu = mu_vec[idx]
+    sub_sigma = sigma_mat[np.ix_(idx, idx)]
+
+    sampled_waits = rng.multivariate_normal(mean=sub_mu, cov=sub_sigma)
+    sampled_waits = np.clip(sampled_waits, clip_min, clip_max)
+
+    total_time = 0.0
+    for ride, sampled_wait in zip(selected, sampled_waits):
+        total_time += 2.0 * ride.drive_min + ride.duration_min + float(sampled_wait)
+
+    return total_time
+
+
+def simulate_overrun_probability(
+    selected: List[Ride],
+    budget_min: float,
+    wait_stats_npz_path: Path,
+    n_sim: int = 1000,
+    seed: int = 0,
+    clip_min: float = 0.0,
+    clip_max: float = 300.0,
+) -> dict:
+    mu_vec, sigma_mat, ride_names = load_wait_stats_npz(wait_stats_npz_path)
+    rng = np.random.default_rng(seed)
+
+    simulated_total_times: List[float] = []
+    overruns: List[float] = []
+
+    for _ in range(n_sim):
+        total_time = simulate_plan_time_once(
+            selected=selected,
+            mu_vec=mu_vec,
+            sigma_mat=sigma_mat,
+            ride_names=ride_names,
+            rng=rng,
+            clip_min=clip_min,
+            clip_max=clip_max,
+        )
+        simulated_total_times.append(total_time)
+        overruns.append(max(0.0, total_time - budget_min))
+
+    over_count = sum(t > budget_min + 1e-9 for t in simulated_total_times)
+    prob_over = over_count / n_sim
+
+    sorted_times = sorted(simulated_total_times)
+    q95 = sorted_times[int(0.95 * (n_sim - 1))]
+    q99 = sorted_times[int(0.99 * (n_sim - 1))]
+
+    positive_overruns = [x for x in overruns if x > 0]
+    avg_overrun_if_over = (
+        sum(positive_overruns) / len(positive_overruns)
+        if positive_overruns else 0.0
+    )
+
+    return {
+        "n_sim": n_sim,
+        "prob_overrun": prob_over,
+        "mean_total_time": float(sum(simulated_total_times) / n_sim),
+        "std_total_time": float(statistics.pstdev(simulated_total_times)),
+        "p95_total_time": float(q95),
+        "p99_total_time": float(q99),
+        "avg_overrun_if_over": float(avg_overrun_if_over),
+        "max_total_time": float(max(simulated_total_times)),
+        "min_total_time": float(min(simulated_total_times)),
+    }
+
+
 def main():
     repo_root = Path(__file__).resolve().parents[1]
     default_processed = repo_root / "data" / "processed"
@@ -215,6 +298,19 @@ def main():
     parser.add_argument("--ride_metadata", type=str, default=str(default_processed / "ride_metadata.json"))
     parser.add_argument("--driving_times", type=str, default=str(default_processed / "driving_times.json"))
     parser.add_argument("--wait_stats", type=str, default=str(default_processed / "wait_stats_all.json"))
+
+    parser.add_argument("--n_sim", type=int, default=1000, help="Number of Monte Carlo simulations")
+    parser.add_argument(
+        "--simulate_overrun",
+        action="store_true",
+        help="Run Monte Carlo simulation to estimate probability of exceeding budget"
+    )
+    parser.add_argument(
+        "--wait_stats_npz",
+        type=str,
+        default=str(default_processed / "wait_stats_all.npz"),
+        help="Path to .npz file containing full mu and sigma"
+    )
 
     args = parser.parse_args()
 
@@ -242,6 +338,35 @@ def main():
     print("Rides picked (in order):")
     for r in chosen:
         print(f"  - {r.key:22s} | {r.name:30s} | rating={r.rating:.1f} | cost={r.cost_min:.2f} min")
+
+        total_rating, total_time = summarize_plan(chosen)
+
+    print(f"Baseline: {args.baseline}")
+    print(f"Budget (min): {args.budget_min:.2f}")
+    print(f"Deterministic total time used (using mean waits): {total_time:.2f}")
+    print(f"Total rating: {total_rating:.2f}")
+    print("Rides picked (in order):")
+    for r in chosen:
+        print(f"  - {r.key:22s} | {r.name:30s} | rating={r.rating:.1f} | cost={r.cost_min:.2f} min")
+
+    if args.simulate_overrun:
+        sim = simulate_overrun_probability(
+            selected=chosen,
+            budget_min=args.budget_min,
+            wait_stats_npz_path=Path(args.wait_stats_npz),
+            n_sim=args.n_sim,
+            seed=args.seed,
+        )
+
+        print("\nMonte Carlo overrun experiment")
+        print(f"  Simulations: {sim['n_sim']}")
+        print(f"  P(total_time > budget): {sim['prob_overrun']:.4f}")
+        print(f"  Mean simulated total time: {sim['mean_total_time']:.2f} min")
+        print(f"  Std simulated total time: {sim['std_total_time']:.2f} min")
+        print(f"  95th percentile total time: {sim['p95_total_time']:.2f} min")
+        print(f"  99th percentile total time: {sim['p99_total_time']:.2f} min")
+        print(f"  Avg overrun | overrun happened: {sim['avg_overrun_if_over']:.2f} min")
+        print(f"  Min / Max simulated total time: {sim['min_total_time']:.2f} / {sim['max_total_time']:.2f} min")
 
 
 if __name__ == "__main__":

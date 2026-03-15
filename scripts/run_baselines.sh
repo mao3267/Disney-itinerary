@@ -4,7 +4,8 @@ set -euo pipefail
 # -----------------
 # Config
 # -----------------
-BUDGET_MIN="${1:-600}"   # default 600 minutes (10 hours)
+BUDGET_MIN="${1:-600}"      # default 600 minutes (10 hours)
+N_SIM="${2:-1000}"          # default Monte Carlo runs
 SEED=42
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,7 +18,7 @@ OUTDIR="${REPO_ROOT}/outputs/baselines"
 mkdir -p "${OUTDIR}"
 
 SUMMARY="${OUTDIR}/summary.csv"
-echo "baseline,wait_type,budget_min,total_time_used_min,total_rating,rides_count,rides_list" > "${SUMMARY}"
+echo "baseline,wait_type,budget_min,total_time_used_min,total_rating,rides_count,rides_list,prob_overrun,mean_sim_time,std_sim_time,p95_sim_time,p99_sim_time,avg_overrun_if_over,min_sim_time,max_sim_time" > "${SUMMARY}"
 
 # -----------------
 # Experiment grid
@@ -26,49 +27,88 @@ WAIT_TYPES=("value" "regular" "peak" "all")
 BASELINES=("random" "greedy_rating" "max_rating" "max_count")
 
 # -----------------
+# Helpers
+# -----------------
+extract_value_after_colon () {
+  local pattern="$1"
+  local file="$2"
+  grep -E "${pattern}" "${file}" | awk -F': ' '{print $2}' | head -n1 | tr -d '\r'
+}
+
+# -----------------
 # Function
 # -----------------
 run_one () {
   local baseline="$1"
   local wait_type="$2"
-  local wait_file="${PROCESSED_DIR}/wait_stats_${wait_type}.json"
-  local log_file="${OUTDIR}/${baseline}__${wait_type}__budget${BUDGET_MIN}.txt"
 
-  if [[ ! -f "${wait_file}" ]]; then
-    echo "ERROR: missing ${wait_file}" >&2
+  local wait_json="${PROCESSED_DIR}/wait_stats_${wait_type}.json"
+  local wait_npz="${PROCESSED_DIR}/wait_stats_${wait_type}.npz"
+  local log_file="${OUTDIR}/${baseline}__${wait_type}__budget${BUDGET_MIN}__sim${N_SIM}.txt"
+
+  if [[ ! -f "${wait_json}" ]]; then
+    echo "ERROR: missing ${wait_json}" >&2
     exit 1
   fi
 
-  # Always pass --seed (harmless for non-random baselines; useful if you later add seeded behavior)
+  if [[ ! -f "${wait_npz}" ]]; then
+    echo "ERROR: missing ${wait_npz}" >&2
+    exit 1
+  fi
+
   python3 "${PY_SCRIPT}" \
     --baseline "${baseline}" \
     --budget_min "${BUDGET_MIN}" \
     --seed "${SEED}" \
-    --wait_stats "${wait_file}" \
+    --wait_stats "${wait_json}" \
+    --wait_stats_npz "${wait_npz}" \
+    --simulate_overrun \
+    --n_sim "${N_SIM}" \
     | tee "${log_file}" > /dev/null
 
   # -----------------
-  # Parse output
+  # Parse deterministic output
   # -----------------
   local total_time total_rating rides_count rides_list
+  total_time="$(extract_value_after_colon '^Total time used \(min\):' "${log_file}")"
+  total_rating="$(extract_value_after_colon '^Total rating:' "${log_file}")"
 
-  total_time="$(grep -E "Total time used \(min\):" "${log_file}" | awk -F': ' '{print $2}' | head -n1 | tr -d '\r')"
-  total_rating="$(grep -E "^Total rating:" "${log_file}" | awk -F': ' '{print $2}' | head -n1 | tr -d '\r')"
-
-  # Extract ride keys from lines like:
-  #   - seven_dwarfs_train      | Seven Dwarfs ... | rating=...
-  rides_list="$(grep -E "^  - " "${log_file}" | sed -E 's/^  - ([^[:space:]]+).*/\1/' | paste -sd '|' -)"
-  rides_count="$(grep -E "^  - " "${log_file}" | wc -l | tr -d ' ')"
-
+  rides_list="$(grep -E '^  - ' "${log_file}" | sed -E 's/^  - ([^[:space:]]+).*/\1/' | paste -sd '|' -)"
+  rides_count="$(grep -E '^  - ' "${log_file}" | wc -l | tr -d ' ')"
   rides_list="${rides_list:-}"
 
-  echo "${baseline},${wait_type},${BUDGET_MIN},${total_time},${total_rating},${rides_count},\"${rides_list}\"" >> "${SUMMARY}"
+  # -----------------
+  # Parse simulation output
+  # Expected lines:
+  #   P(total_time > budget): ...
+  #   Mean simulated total time: ...
+  #   Std simulated total time: ...
+  #   95th percentile total time: ...
+  #   99th percentile total time: ...
+  #   Avg overrun | overrun happened: ...
+  #   Min / Max simulated total time: A / B min
+  # -----------------
+  local prob_overrun mean_sim_time std_sim_time p95_sim_time p99_sim_time
+  local avg_overrun_if_over min_sim_time max_sim_time minmax_line
+
+  prob_overrun="$(extract_value_after_colon '^  P\(total_time > budget\):' "${log_file}")"
+  mean_sim_time="$(extract_value_after_colon '^  Mean simulated total time:' "${log_file}" | awk '{print $1}')"
+  std_sim_time="$(extract_value_after_colon '^  Std simulated total time:' "${log_file}" | awk '{print $1}')"
+  p95_sim_time="$(extract_value_after_colon '^  95th percentile total time:' "${log_file}" | awk '{print $1}')"
+  p99_sim_time="$(extract_value_after_colon '^  99th percentile total time:' "${log_file}" | awk '{print $1}')"
+  avg_overrun_if_over="$(extract_value_after_colon '^  Avg overrun \| overrun happened:' "${log_file}" | awk '{print $1}')"
+
+  minmax_line="$(extract_value_after_colon '^  Min / Max simulated total time:' "${log_file}")"
+  min_sim_time="$(echo "${minmax_line}" | awk -F' / ' '{print $1}')"
+  max_sim_time="$(echo "${minmax_line}" | awk -F' / ' '{print $2}' | awk '{print $1}')"
+
+  echo "${baseline},${wait_type},${BUDGET_MIN},${total_time},${total_rating},${rides_count},\"${rides_list}\",${prob_overrun},${mean_sim_time},${std_sim_time},${p95_sim_time},${p99_sim_time},${avg_overrun_if_over},${min_sim_time},${max_sim_time}" >> "${SUMMARY}"
 }
 
 # -----------------
 # Main loop
 # -----------------
-echo "Running baselines (budget=${BUDGET_MIN})..."
+echo "Running baselines (budget=${BUDGET_MIN}, n_sim=${N_SIM})..."
 echo
 
 for wt in "${WAIT_TYPES[@]}"; do

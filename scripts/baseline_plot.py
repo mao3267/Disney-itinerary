@@ -28,8 +28,6 @@ def pick_existing_column(df: pd.DataFrame, candidates):
 
 
 def get_kappa_zero_row(sweep: pd.DataFrame, tol: float = 1e-9):
-    if "kappa" not in sweep.columns:
-        raise ValueError("sweep csv must contain column 'kappa'")
 
     exact = sweep[(sweep["kappa"] - 0.0).abs() <= tol].copy()
     if not exact.empty:
@@ -92,8 +90,6 @@ def build_selection_matrix(summary: pd.DataFrame, sweep: pd.DataFrame, wait_type
 
 def make_figure2(summary: pd.DataFrame, sweep: pd.DataFrame, outdir: Path, wait_type: str = "all"):
     df = summary[summary["wait_type"] == wait_type].copy()
-    if df.empty:
-        raise ValueError(f"No baseline rows found for wait_type={wait_type}")
 
     baseline_order = ["random", "greedy_rating", "max_count", "max_rating"]
     df["baseline"] = pd.Categorical(df["baseline"], categories=baseline_order, ordered=True)
@@ -131,7 +127,7 @@ def make_figure2(summary: pd.DataFrame, sweep: pd.DataFrame, outdir: Path, wait_
 
     fig, axes = plt.subplots(3, 1, figsize=(10, 11), sharex=True)
     fig.suptitle(
-        f"Figure 2. Baseline comparison\nSeason={wait_type}, Budget=600 min, robust reference=$\\kappa=0$",
+        f"Baseline comparison\nSeason={wait_type}, Budget=600 min, robust reference=$\\kappa=0$",
         fontsize=18,
         y=0.98,
     )
@@ -159,7 +155,7 @@ def make_figure2(summary: pd.DataFrame, sweep: pd.DataFrame, outdir: Path, wait_
     axes[2].set_xticklabels(plot_df["method"], rotation=15, fontsize=12)
     axes[2].set_xlabel("Method", fontsize=14)
 
-    outpath = outdir / f"figure2_baseline_comparison__{wait_type}.png"
+    outpath = outdir / f"baseline_comparison__{wait_type}.png"
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close()
@@ -178,7 +174,7 @@ def make_figure3(summary: pd.DataFrame, outdir: Path):
     df = df.sort_values(["baseline", "wait_type"])
 
     fig, axes = plt.subplots(3, 1, figsize=(10, 11), sharex=True)
-    fig.suptitle("Figure 3. Season comparison", fontsize=18, y=0.98)
+    fig.suptitle("Season comparison", fontsize=18, y=0.98)
 
     for baseline in baseline_order:
         sub = df[df["baseline"] == baseline].copy()
@@ -206,7 +202,7 @@ def make_figure3(summary: pd.DataFrame, outdir: Path):
 
     axes[2].set_xlabel("Season / wait assumption", fontsize=14)
 
-    outpath = outdir / "figure3_season_comparison.png"
+    outpath = outdir / "season_comparison.png"
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close()
@@ -233,7 +229,7 @@ def make_figure4(
     ax.set_yticklabels(matrix.index, fontsize=10)
 
     ax.set_title(
-        f"Figure 4. Ride selection heatmap\nSeason={wait_type}, robust reference=$\\kappa=0$",
+        f"Ride selection heatmap\nSeason={wait_type}, robust reference=$\\kappa=0$",
         fontsize=16,
         pad=12,
     )
@@ -257,7 +253,7 @@ def make_figure4(
 
     plt.tight_layout()
 
-    outpath = outdir / f"figure4_ride_selection_heatmap__{wait_type}.png"
+    outpath = outdir / f"ride_selection_heatmap__{wait_type}.png"
     plt.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close()
 
@@ -279,7 +275,7 @@ def make_figure5(
     ax.set_xlabel("Number of methods selecting the ride", fontsize=12)
     ax.set_ylabel("Ride", fontsize=12)
     ax.set_title(
-        f"Figure 5. Ride selection frequency\nSeason={wait_type}, including robust reference $\\kappa=0$",
+        f"Ride selection frequency\nSeason={wait_type}, including robust reference $\\kappa=0$",
         fontsize=16,
         pad=12,
     )
@@ -287,7 +283,7 @@ def make_figure5(
 
     plt.tight_layout()
 
-    outpath = outdir / f"figure5_ride_selection_frequency__{wait_type}.png"
+    outpath = outdir / f"ride_selection_frequency__{wait_type}.png"
     plt.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.close()
 
@@ -301,11 +297,11 @@ def main():
 
     summary, sweep = load_data(repo_root)
 
-    make_figure2(summary, sweep, outdir, wait_type="all")
-    make_figure3(summary, outdir)
+    # make_figure2(summary, sweep, outdir, wait_type="all")
+    # make_figure3(summary, outdir)
 
-    make_figure4(summary, sweep, outdir, wait_type="all")
-    make_figure5(summary, sweep, outdir, wait_type="all")
+    # make_figure4(summary, sweep, outdir, wait_type="all")
+    # make_figure5(summary, sweep, outdir, wait_type="all")
 
 
 if __name__ == "__main__":
